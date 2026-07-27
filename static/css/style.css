@@ -1,0 +1,410 @@
+/* ========== ESTILOS GENERALES ========== */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ========== NAVBAR ========== */
+.bg-gradient-primary {
+    background: var(--primary-gradient) !important;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.navbar-brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem !important;
+    font-weight: 700;
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: all 0.3s ease;
+    font-weight: 400;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FFD700 !important;
+    transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link.active {
+    color: #FFD700 !important;
+    font-weight: 600;
+}
+
+/* ========== HERO SECTION ========== */
+.hero-section {
+    min-height: 100vh;
+    background: var(--primary-gradient);
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+    background-size: cover;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========== IMAGEN DE PERFIL ========== */
+.profile-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 5px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+    animation: floatProfile 3s ease-in-out infinite;
+}
+
+.profile-image:hover {
+    transform: scale(1.05) rotate(-3deg);
+    border-color: #FFD700;
+}
+
+@keyframes floatProfile {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ========== CONTADOR ========== */
+.counter-container {
+    margin-top: 2rem;
+}
+
+.counter-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px 15px;
+    margin: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.counter-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.counter-number {
+    font-size: 3rem;
+    font-weight: 700;
+    display: block;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Dancing Script', cursive;
+}
+
+.counter-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
+/* ========== MENSAJE DE CUMPLEAÑOS ========== */
+.birthday-message {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 105, 180, 0.2));
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(255, 215, 0, 0.5);
+    }
+}
+
+/* ========== SECCIONES ========== */
+.section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem !important;
+    position: relative;
+    display: inline-block;
+    color: #333;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--secondary-gradient);
+    border-radius: 3px;
+}
+
+/* ========== TARJETA DE MENSAJE ========== */
+.message-card {
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe8f0 100%);
+    transition: all 0.3s ease;
+}
+
+.message-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.message-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* ========== GALERÍA DE IMÁGENES ========== */
+.gallery-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.gallery-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-image {
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .gallery-image {
+    transform: scale(1.08);
+}
+
+.gallery-card .card-body {
+    background: white;
+}
+
+/* ========== GALERÍA DE VIDEOS ========== */
+.video-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: #000;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    overflow: hidden;
+    background: #000;
+}
+
+.video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.video-player:focus {
+    outline: none;
+}
+
+.video-player::-webkit-media-controls {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.video-overlay i {
+    font-size: 4rem;
+    color: white;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.video-container:hover .video-overlay {
+    opacity: 1;
+}
+
+.video-container:hover .video-overlay i {
+    transform: scale(1.1);
+}
+
+.video-card .card-body {
+    background: white;
+}
+
+.video-card .card-body .card-text {
+    margin-bottom: 0;
+}
+
+/* ========== CONFETI ========== */
+#confeti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.confeti {
+    position: absolute;
+    top: -10px;
+    animation: confetiFall linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes confetiFall {
+    0% {
+        transform: translateY(-10px) rotate(0deg) scale(0.5);
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ========== CORAZONES ========== */
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}
+
+.heart-beat {
+    animation: heartBeat 1s ease-in-out infinite;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.heart-beat:hover {
+    transform: scale(1.5) !important;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .counter-number {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem !important;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem !important;
+    }
+    
+    .hero-section h2 {
+        font-size: 2rem !important;
+    }
+    
+    .counter-box {
+        padding: 15px 10px;
+    }
+    
+    .birthday-message {
+        padding: 20px;
+    }
+    
+    .gallery-image {
+        height: 200px;
+    }
+    
+    .video-overlay i {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .counter-number {
+        font-size: 1.5rem;
+    }
+    
+    .hero-section {
+        padding-top: 60px;
+    }
+    
+    .message-content {
+        font-size: 0.95rem;
+    }
+    
+    .video-overlay i {
+        font-size: 2.5rem;
+    }
+}

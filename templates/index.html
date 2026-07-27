@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 ¡Feliz Cumpleaños Daniel!</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- Contenedor de Confeti -->
+<div id="confeti-container"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-crown"></i> Dany
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#inicio">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#mensaje">
+                        <i class="fas fa-heart"></i> Mensaje
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#galeria">
+                        <i class="fas fa-images"></i> Galería
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#videos">
+                        <i class="fas fa-video"></i> Videos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#subir">
+                        <i class="fas fa-upload"></i> Subir
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- SECCIÓN INICIO -->
+<section id="inicio" class="hero-section d-flex align-items-center">
+    <div class="container text-center text-white">
+        <div class="row">
+            <div class="col-12">
+                <div class="hero-content">
+                    
+                    <!-- Título Principal -->
+                    <h1 class="display-1 fw-bold animate-title">
+                        🎂 ¡FELICIDADES DANIEL! 🎂
+                    </h1>
+                    <h2 class="display-4 mb-3 text-warning">¡18 años!</h2>
+                    <p class="lead mb-4">Celebremos este día tan especial juntos ❤️</p>
+                    
+                    <!-- Foto de Perfil -->
+                    <div class="profile-image-container mb-4">
+                        <img src="{{ url_for('static', filename='images/perfil.jpeg') }}" 
+                             alt="Foto de Daniel" 
+                             class="profile-image rounded-circle shadow-lg"
+                             onerror="this.src='https://via.placeholder.com/200x200/FF69B4/FFFFFF?text=❤️+Daniel'">
+                    </div>
+                    
+                    <!-- CONTADOR / MENSAJE DE CUMPLEAÑOS -->
+                    {% if es_cumple %}
+                        <!-- Mensaje de Cumpleaños -->
+                        <div class="birthday-message animate__animated animate__bounceIn">
+                            <h2 class="display-3 text-warning">
+                                🎉 ¡HOY ES EL GRAN DÍA! 🎉
+                            </h2>
+                            <h3 class="text-white mt-3">¡Feliz Cumpleaños, Daniel! 🥳</h3>
+                            <p class="lead text-white-50">18 años de alegría, amor y felicidad</p>
+                            <div class="mt-4">
+                                <i class="fas fa-heart text-danger fa-3x heart-beat mx-2"></i>
+                                <i class="fas fa-star text-warning fa-3x heart-beat mx-2"></i>
+                                <i class="fas fa-heart text-danger fa-3x heart-beat mx-2"></i>
+                            </div>
+                            <div class="mt-3">
+                                <span class="badge bg-warning text-dark fs-4 p-3">
+                                    <i class="fas fa-gift"></i> ¡Disfruta tu día!
+                                </span>
+                            </div>
+                        </div>
+                    {% else %}
+                        <!-- Cuenta Regresiva -->
+                        <div class="counter-container">
+                            <p class="text-white-50 mb-3 fs-5">
+                                <i class="fas fa-clock"></i> 
+                                Faltan <strong class="text-warning">{{ dias_restantes }}</strong> días para el gran día
+                            </p>
+                            <div class="row justify-content-center">
+                                <div class="col-6 col-md-3">
+                                    <div class="counter-box">
+                                        <span class="counter-number" id="days">0</span>
+                                        <span class="counter-label">Días</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="counter-box">
+                                        <span class="counter-number" id="hours">0</span>
+                                        <span class="counter-label">Horas</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="counter-box">
+                                        <span class="counter-number" id="minutes">0</span>
+                                        <span class="counter-label">Minutos</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="counter-box">
+                                        <span class="counter-number" id="seconds">0</span>
+                                        <span class="counter-label">Segundos</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-white-50 mt-3 small">
+                                <i class="fas fa-calendar-alt"></i> 
+                                17 de agosto de 2026
+                            </p>
+                        </div>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN MENSAJE -->
+<section id="mensaje" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 section-title">
+            <i class="fas fa-heart text-danger"></i> Un Mensaje Especial
+        </h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card message-card shadow-lg">
+                    <div class="card-body p-5">
+                        <div class="message-content">
+                            <h3 class="text-center text-primary">Para mi amor ❤️</h3>
+                            <p class="lead text-center">
+                                Querido Daniel,
+                            </p>
+                            <p class="text-center">
+                                Hoy cumples 18 años y quiero que sepas lo especial que eres para mí. 
+                                Eres la persona más increíble que he conocido y cada día a tu lado es un regalo.
+                            </p>
+                            <p class="text-center">
+                                Que este nuevo año de vida esté lleno de alegría, amor y muchas bendiciones. 
+                                ¡Te mereces todo lo mejor del mundo!
+                            </p>
+                            <div class="text-center mt-4">
+                                <i class="fas fa-heart text-danger fa-2x heart-beat"></i>
+                                <i class="fas fa-heart text-danger fa-2x heart-beat mx-3"></i>
+                                <i class="fas fa-heart text-danger fa-2x heart-beat"></i>
+                            </div>
+                            <p class="text-center fst-italic mt-3">
+                                Con todo mi amor,<br>
+                                <strong>Tu persona especial 💕</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN GALERÍA DE IMÁGENES -->
+<section id="galeria" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 section-title">
+            <i class="fas fa-images text-success"></i> Nuestros Recuerdos
+        </h2>
+        <div class="row g-4">
+            <!-- Imagen 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card gallery-card shadow-lg h-100">
+                    <img src="{{ url_for('static', filename='images/cumple1.jpeg') }}" 
+                         class="card-img-top gallery-image" 
+                         alt="Recuerdo 1"
+                         onerror="this.src='https://via.placeholder.com/400x300/FFB6C1/FFFFFF?text=❤️+Recuerdo+1'">
+                    <div class="card-body text-center">
+                        <p class="card-text"><strong>📸 Momento especial</strong></p>
+                        <small class="text-muted">"Nuestro primer recuerdo juntos"</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Imagen 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card gallery-card shadow-lg h-100">
+                    <img src="{{ url_for('static', filename='images/cumple2.jpeg') }}" 
+                         class="card-img-top gallery-image" 
+                         alt="Recuerdo 2"
+                         onerror="this.src='https://via.placeholder.com/400x300/98FB98/FFFFFF?text=❤️+Recuerdo+2'">
+                    <div class="card-body text-center">
+                        <p class="card-text"><strong>📸 Días felices</strong></p>
+                        <small class="text-muted">"Siempre sonriendo juntos"</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Imagen 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card gallery-card shadow-lg h-100">
+                    <img src="{{ url_for('static', filename='images/cumple3.jpeg') }}" 
+                         class="card-img-top gallery-image" 
+                         alt="Recuerdo 3"
+                         onerror="this.src='https://via.placeholder.com/400x300/87CEEB/FFFFFF?text=❤️+Recuerdo+3'">
+                    <div class="card-body text-center">
+                        <p class="card-text"><strong>📸 Aventuras</strong></p>
+                        <small class="text-muted">"Explorando juntos"</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Imagen 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card gallery-card shadow-lg h-100">
+                    <img src="{{ url_for('static', filename='images/cumple4.jpeg') }}" 
+                         class="card-img-top gallery-image" 
+                         alt="Recuerdo 4"
+                         onerror="this.src='https://via.placeholder.com/400x300/DDA0DD/FFFFFF?text=❤️+Recuerdo+4'">
+                    <div class="card-body text-center">
+                        <p class="card-text"><strong>📸 Amor eterno</strong></p>
+                        <small class="text-muted">"Eres mi todo"</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN GALERÍA DE VIDEOS -->
+<section id="videos" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 section-title">
+            <i class="fas fa-video text-danger"></i> Momentos en Video
+        </h2>
+        <div class="row g-4">
+            <!-- Video 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card video-card shadow-lg h-100">
+                    <div class="video-container">
+                        <video class="video-player" controls preload="metadata">
+                            <source src="{{ url_for('static', filename='videos/video1.mp4') }}" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/video1.webm') }}" type="video/webm">
+                            Tu navegador no soporta videos HTML5.
+                        </video>
+                        <div class="video-overlay">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="card-text"><strong>🎬 Recuerdo en Video 1</strong></p>
+                        <small class="text-muted">"Momentos inolvidables"</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card video-card shadow-lg h-100">
+                    <div class="video-container">
+                        <video class="video-player" controls preload="metadata">
+                            <source src="{{ url_for('static', filename='videos/video2.mp4') }}" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/video2.webm') }}" type="video/webm">
+                            Tu navegador no soporta videos HTML5.
+                        </video>
+                        <div class="video-overlay">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="card-text"><strong>🎬 Recuerdo en Video 2</strong></p>
+                        <small class="text-muted">"Siempre juntos"</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card video-card shadow-lg h-100">
+                    <div class="video-container">
+                        <video class="video-player" controls preload="metadata">
+                            <source src="{{ url_for('static', filename='videos/video3.mp4') }}" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/video3.webm') }}" type="video/webm">
+                            Tu navegador no soporta videos HTML5.
+                        </video>
+                        <div class="video-overlay">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="card-text"><strong>🎬 Recuerdo en Video 3</strong></p>
+                        <small class="text-muted">"Un día especial"</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card video-card shadow-lg h-100">
+                    <div class="video-container">
+                        <video class="video-player" controls preload="metadata">
+                            <source src="{{ url_for('static', filename='videos/video4.mp4') }}" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/video4.webm') }}" type="video/webm">
+                            Tu navegador no soporta videos HTML5.
+                        </video>
+                        <div class="video-overlay">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="card-text"><strong>🎬 Recuerdo en Video 4</strong></p>
+                        <small class="text-muted">"te amo daniel"</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN SUBIR ARCHIVOS -->
+<section id="subir" class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Subir Imagen -->
+            <div class="col-lg-6">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4><i class="fas fa-image"></i> Subir Foto de Daniel</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if mensaje %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ mensaje }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endif %}
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="imagen" class="form-label">
+                                    <i class="fas fa-image"></i> Selecciona una imagen
+                                </label>
+                                <input type="file" class="form-control" id="imagen" name="imagen" 
+                                       accept=".png,.jpg,.jpeg,.avif" required>
+                                <small class="text-muted">Formatos: PNG, JPG, JPEG, AVIF</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-cloud-upload-alt"></i> Subir Imagen
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subir Video -->
+            <div class="col-lg-6">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-danger text-white text-center">
+                        <h4><i class="fas fa-video"></i> Subir Video</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if video_mensaje %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ video_mensaje }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endif %}
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="video" class="form-label">
+                                    <i class="fas fa-video"></i> Selecciona un video
+                                </label>
+                                <input type="file" class="form-control" id="video" name="video" 
+                                       accept=".mp4,.webm,.ogg,.avi,.mov" required>
+                                <small class="text-muted">Formatos: MP4, WebM, OGG, AVI, MOV</small>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="fas fa-cloud-upload-alt"></i> Subir Video
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+        <p class="mb-0">
+            <i class="fas fa-heart text-danger"></i> 
+            Con amor para Daniel - 18 años 
+            <i class="fas fa-heart text-danger"></i>
+        </p>
+        <small class="text-muted">17 de agosto de 2026 - Un día especial ❤️</small>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript Personalizado -->
+<script>
+    // CUENTA REGRESIVA - 17 de agosto de 2026
+    function updateCountdown() {
+        const birthday = new Date('August 17, 2026 00:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = birthday - now;
+
+        if (diff > 0) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+    }
+
+    // Actualizar cada segundo
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // CONFETI ANIMADO
+    function createConfeti() {
+        const container = document.getElementById('confeti-container');
+        const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#FFD93D', '#FF69B4', '#FFA500'];
+        const shapes = ['circle', 'square', 'triangle'];
+        
+        for (let i = 0; i < 60; i++) {
+            const confeti = document.createElement('div');
+            confeti.className = 'confeti';
+            confeti.style.left = Math.random() * 100 + '%';
+            confeti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            confeti.style.animationDelay = Math.random() * 3 + 's';
+            confeti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confeti.style.width = Math.random() * 10 + 5 + 'px';
+            confeti.style.height = Math.random() * 10 + 5 + 'px';
+            
+            // Formas diferentes
+            const shape = shapes[Math.floor(Math.random() * shapes.length)];
+            if (shape === 'circle') {
+                confeti.style.borderRadius = '50%';
+            } else if (shape === 'triangle') {
+                confeti.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+            }
+            
+            container.appendChild(confeti);
+        }
+    }
+    
+    createConfeti();
+
+    // CORAZONES LATIENTES
+    setInterval(() => {
+        document.querySelectorAll('.heart-beat').forEach(el => {
+            el.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                el.style.transform = 'scale(1)';
+            }, 300);
+        });
+    }, 1000);
+
+    // EFECTO DE ESCRITURA EN EL TÍTULO
+    document.addEventListener('DOMContentLoaded', function() {
+        const title = document.querySelector('.animate-title');
+        if (title) {
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(30px)';
+            setTimeout(() => {
+                title.style.transition = 'all 1s ease';
+                title.style.opacity = '1';
+                title.style.transform = 'translateY(0)';
+            }, 500);
+        }
+    });
+
+    // CONTROL DE VIDEOS - Auto pausa cuando no están visibles
+    document.addEventListener('DOMContentLoaded', function() {
+        const videos = document.querySelectorAll('.video-player');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (!entry.isIntersecting) {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        videos.forEach(video => {
+            observer.observe(video);
+        });
+    });
+</script>
+
+</body>
+</html>
